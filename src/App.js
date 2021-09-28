@@ -1,25 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { Component } from 'react';
+import { AppContextProvider, AppContext} from './appContext';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class Lista extends Component {
+render() {
+   const {title, users} = this.context;
+    var a = this.context;
+    console.log(a)
+    return (
+           <React.Fragment>
+              <h1>{title}</h1>
+              <ul>
+                {users.map(user => 
+                <li>{user}</li>
+                )}
+              </ul>
+            </React.Fragment>
+    );
+  }
+
+}
+Lista.contextType = AppContext;
+
+class App extends Component {
+  render() {
+    return (
+      <AppContextProvider >
+        
+        <Lista/>
+
+      </AppContextProvider>
+    );
+  }
 }
 
 export default App;
